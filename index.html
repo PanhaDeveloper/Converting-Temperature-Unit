@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        body{
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgb(0, 43, 64);
+        }
+        .convert-container{
+            background-color: rgba(255,255,255,0.1);
+            backdrop-filter: blur(20px);
+            height: 15rem;
+            padding: 0rem 2rem;
+            border-radius: 10px;
+        }
+        .convert-container h1{
+            text-align: center;
+            color: #fff;
+            padding: 20px 0px;
+            text-transform: uppercase;
+        }
+        .convert-container h1::after{
+            margin-top: 20px;
+            content: "";
+            width: 100%;
+            height: 2px;
+            background-color: rgb(255, 255, 255);
+            display: block;
+            border-radius: 10px;
+        }
+        #boxValueOne, #boxValueSecond{
+            padding: 0.5rem;
+            border: none;
+            outline: none;
+            border-radius: 10px;
+            color: rgb(2, 2, 16);
+            font-size: 18px;
+            text-align: center;
+            width: 120px;
+            font-weight: 500;
+            background-color: rgba(255, 255, 255, 0.501);
+            backdrop-filter: blur(20px);
+        }
+        span{
+            color: #fff;
+            font-size: 20px;
+        }
+        .unit #unit{
+            margin-top: 1rem;
+            width: 100%;
+            padding: 0.5rem;
+            border: none;
+            outline: none;
+            border-radius: 10px;
+            color: rgb(2, 2, 16);
+            font-size: 18px;
+            font-weight: 500;
+            background-color: rgba(255, 255, 255, 0.501);
+            backdrop-filter: blur(20px);
+            margin-bottom: 1rem;
+        }
+        .formula{
+            background-color: darkgoldenrod;
+            
+        }
+        .formula-content{
+            display: flex;
+            gap: 1rem;
+        }
+        .formula,.formula-calc{
+            font-size: 15px;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="convert-container">
+        <h1>Convert Unit</h1>
+        <input type="number" id="boxValueOne">
+        <span>=</span>
+        <input type="number" id="boxValueSecond">
+        <div class="unit">
+            <input list="browsers" id="unit">
+            <datalist id="browsers">
+                <option value="Fahrenheit" id="fahrenheit">
+                <option value="Celsius" id="celsius">
+            </datalist>
+        </div>
+        <div class="formula-content">
+            <span class="formula">Formula</span>
+            <h4 class="formula-calc"></h4>
+        </div>
+    </div>
+    <script>
+        let Formula = document.querySelector(".formula-calc");
+        let boxOne = document.getElementById("boxValueOne");
+        let boxTwo = document.getElementById("boxValueSecond");
+        let unit = document.getElementById("unit");
+        function convertTemperature() {
+        if (unit.value === "Fahrenheit") {
+        boxTwo.value = (boxOne.value - 32) * 5/9;
+        Formula.innerHTML = "("+boxOne.value+"°F" + "-"+"32"+")"+"x"+"5/9";
+        } else if (unit.value === "Celsius") {
+        boxTwo.value = (boxOne.value * 9/5) + 32;
+        Formula.innerHTML = "("+boxOne.value+"°C" + "x"+"9/5"+")"+"+"+"32";
+        }
+    }
+    boxOne.addEventListener("keyup", convertTemperature);
+    unit.addEventListener("change", convertTemperature);
+    </script>
+</body>
+</html>
